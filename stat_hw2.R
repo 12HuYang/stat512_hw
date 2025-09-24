@@ -15,11 +15,11 @@ dataset
 model=lm(response ~ ration,data=dataset)
 summary(model)
 model
-install.packages("lsmeans")
+# install.packages("lsmeans")
 library(lsmeans)
 leastsquare = lsmeans(model,"ration")
 Contrasts = list(abvscd = c(1,1,-1,-1),
-                 abcvsd = c(1,1,1,-1))
+                 abcvsd = c(1,1,1,-3))
 
 lsmeans::contrast(leastsquare,Contrasts)
 
@@ -61,7 +61,7 @@ F
 a1=1
 a2=1
 a3=1
-a4=-1
+a4=-3
 
 l_hat=a1*mu_a+a2*mu_b+a3*mu_c+a4*mu_d
 l_hat
