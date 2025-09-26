@@ -83,6 +83,7 @@ q3=q3_table
 
 y=c(q3$Methodist,q3$Catholic,q3$Pentecostal)
 trt=c(rep("Methodist",10),rep("Catholic",10),rep("Pentecostal",10))
+dataset=list(y=y,trt=trt)
 out=aov(formula=y~trt)
 summary(out)
 
@@ -94,3 +95,12 @@ plot(out, which = 2) #produces normal probability of residuals
 shapiro.test(residuals(out))#normality test
 library(car)
 leveneTest(y~trt)
+
+kruskal.test(y~trt, data = dataset)
+install.packages("FSA")
+library(FSA)
+PT = dunnTest(y ~ trt,
+              data=dataset,
+              method="hochberg") 
+PT
+
